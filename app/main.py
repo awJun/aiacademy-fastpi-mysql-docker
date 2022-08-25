@@ -5,6 +5,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 basedir = os.path.dirname(os.path.abspath(__file__))
 
 from app.services.calcuator import CalculatorService
+from app.services.user import UserService
 
 def print_menu():
     print("0. 전체프로그램 종료")
@@ -26,6 +27,13 @@ def main():    # 메소드
             first = int(input('첫번째 값 입력: '))
             secund = int(input('두번째 값 입력: '))
             calculatorService.calculate(first, secund)     # .이있으면 메소드(.이 없으면 함수)
+       
+        elif menu == '2':
+            userService = UserService()    #  / CalculatorService() : 생성자  식? 
+            id = str(input('아이디를 입력하세요 : '))
+            password = str(input('비밀번호를 입력하세요 : '))
+            userService.calculate(id, password)     # .이있으면 메소드(.이 없으면 함수)
+
 
 if __name__ == '__main__':
     main()
