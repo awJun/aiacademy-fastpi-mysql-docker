@@ -1,18 +1,21 @@
 # uvicorn main:app --reload
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 basedir = os.path.dirname(os.path.abspath(__file__))
 
 from app.services.calcuator import CalculatorService
 from app.services.user import UserService
 from app.services.average import AverageService
+from app.services.pandas_quiz import PandasQuiz
 
 def print_menu():
     print("0. 전체프로그램 종료")
     print("1. 계산기 프로그램")
     print("2. 로그인 프로그램")
     print("3. 성적표 프로그램")
+    print("4. 판다스 퀴즈풀기")
     menu = input("메뉴 선택")
     return menu
  
@@ -37,7 +40,7 @@ def main():    # 메소드
             userService.user(id, password)     # .이있으면 메소드(.이 없으면 함수)
         
         elif menu == '3':
-            averageService = AverageService()    #  / CalculatorService() : 생성자  식? 
+            averageService = AverageService()    #  / averageService() : 생성자  식? 
             name = input('\n학생의 이름을 입력하세요 : \n')
             국어_score = int(input('국어 점수를 입력하세요 : \n'))
             영어_score = int(input('영어 점수를 입력하세요 : \n'))
@@ -45,6 +48,19 @@ def main():    # 메소드
             평균 = averageService.get_평균(name, 국어_score, 영어_score, 수학_score)     # .이있으면 메소드(.이 없으면 함수)
             print(f"이름 : {name} 학점: {평균}")
 
+        elif menu == '4':
+            quiz = PandasQuiz()
+            while 1:
+                quiz_number = input('퀴즈번호 선택. 종료는 0 : ')
+                if quiz_number == '0':
+                    break
+                elif quiz_number == '1':
+                    quiz.quiz_01()
+                elif quiz_number == '2':
+                    quiz.quiz_03()
+                elif quiz_number == '3':
+                    quiz.quiz_04()
+        
 if __name__ == '__main__':
     main()
 
