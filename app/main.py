@@ -1,82 +1,39 @@
-# uvicorn main:app --reload
 import os
 import sys
-
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 basedir = os.path.dirname(os.path.abspath(__file__))
-
-from app.services.calcuator import CalculatorService
-from app.services.user import UserService
-from app.services.average import AverageService
-from app.services.pandas_quiz import PandasQuiz
+from app.api.endpoints.url import Url
+from app.constants.menus import DDARUNG, LOGIN, LOGOUT, CALCULATOR, GRADE, \
+    QUIZ_1, QUIZ_2, QUIZ_3, QUIZ_4, QUIZ_5, QUIZ_6, QUIZ_7,TITANIC
+    
 
 def print_menu():
-    print("0. 전체프로그램 종료")
-    print("1. 계산기 프로그램")
-    print("2. 로그인 프로그램")
-    print("3. 성적표 프로그램")
-    print("4. 판다스 퀴즈풀기")
-    menu = input("메뉴 선택")
+    print(' ###################')
+    print(f'로그인 : {LOGIN}')
+    print(f'로그아웃 : {LOGOUT}')
+    print(f'계산기 : {CALCULATOR}')
+    print(f'성적표 : {GRADE}') 
+    print(f'따릉이 : {DDARUNG}') 
+    print(f'타이타닉 : {TITANIC}') 
+    print(f'퀴즈 1 : {QUIZ_1}') 
+    print(f'퀴즈 2 : {QUIZ_2}')
+    print(f'퀴즈 3 : {QUIZ_3}')
+    print(f'퀴즈 4 : {QUIZ_4}')
+    print(f'퀴즈 4 : {QUIZ_5}')
+    print(f'퀴즈 4 : {QUIZ_6}')
+    print(f'퀴즈 4 : {QUIZ_7}')
+    menu = input('메뉴에서 URL을 카피해서 입력하시오\n')
+    print(' ###################')
     return menu
- 
-def main():    # 메소드
-    # print_menu()    # 메소드 식
-    while 1:   # 구문    /  while 1: 무한반복
+    
+def main():
+    url = Url()
+    while 1:
         menu = print_menu()
-        if menu == "0":
-            print("전체 프로그램을 종료합니다.")
+        if menu == f'{LOGOUT}':
             break
-        
-        elif menu == '1':
-            calculatorService = CalculatorService()    #  / CalculatorService() : 생성자  식? 
-            first = int(input('\n첫번째 값 입력2: \n'))
-            secund = int(input('두번째 값 입력: \n'))
-            calculatorService.calculate(first, secund)     # .이있으면 메소드(.이 없으면 함수)
-        
-        elif menu == '2':
-            userService = UserService()    #  / CalculatorService() : 생성자  식? 
-            id = str(input('\n아이디를 입력하세요 : \n'))
-            password = str(input('비밀번호를 입력하세요 : \n'))
-            userService.user(id, password)     # .이있으면 메소드(.이 없으면 함수)
-        
-        elif menu == '3':
-            averageService = AverageService()    #  / averageService() : 생성자  식? 
-            name = input('\n학생의 이름을 입력하세요 : \n')
-            국어_score = int(input('국어 점수를 입력하세요 : \n'))
-            영어_score = int(input('영어 점수를 입력하세요 : \n'))
-            수학_score = int(input('수학 점수를 입력하세요 : \n'))
-            평균 = averageService.get_평균(name, 국어_score, 영어_score, 수학_score)     # .이있으면 메소드(.이 없으면 함수)
-            print(f"이름 : {name} 학점: {평균}")
-
-        elif menu == '4':
-            quiz = PandasQuiz()
-            while 1:
-                quiz_number = input('퀴즈번호 선택. 종료는 0 : ')
-                if quiz_number == '0':
-                    break
-                elif quiz_number == '1':
-                    quiz.quiz_01()
-                elif quiz_number == '2':
-                    quiz.quiz_03()
-                elif quiz_number == '3':
-                    quiz.quiz_04()
-        
-if __name__ == '__main__':
+        else : url.router(menu)
+                         
+            
+if __name__ == '__main__' :
     main()
-
-
-# main은 마지막 부분 즉, 최종 출력 부분이므로 객체가 들어오면 안된다 그래서 여기서는 함수로 받아야한다.
-# 객체로 안받으려면 self를 사용안하면 함수로 받아준다.
-
-
-# 식은 변수를 리턴하는 곳  /  변수는 값을 받는곳  /  식2개 문2개 변수2
-# 문: 조건문 / 반복문
-# 변수 : 지역변수, 전역변수
-# for while차이는 리미트가 있냐 없냐 차이 while은 리미트 걸어줘야함
-
-
-# 지금 수업 때 하는 것은 아키텍쳐이다.
-
-
-
-

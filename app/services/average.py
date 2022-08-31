@@ -1,5 +1,4 @@
 from app.models.average import Average
-
 class AverageService(object):           # 명사로 이름지음
     def __init__(self) -> None:
         self.credit = 0
